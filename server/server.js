@@ -11,7 +11,7 @@ const app = express();
 
 // Replace with your mongoLab URI
 const MONGO_URI =
-  "mongodb+srv://teste:yuriramos@graphql-bfbuc.mongodb.net/graphql?retryWrites=true&w=majority";
+  "mongodb+srv://teste:yuriramos@cluster0-wwf2m.mongodb.net/test?retryWrites=true&w=majority";
 if (!MONGO_URI) {
   throw new Error("You must provide a MongoLab URI");
 }
