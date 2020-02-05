@@ -1,5 +1,6 @@
 const express = require("express");
 const models = require("./models");
+const passport = require("passport");
 const expressGraphQL = require("express-graphql");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -51,5 +52,7 @@ const hotMiddleware = [
 ];
 
 app.use(hotMiddleware);
+app.use(passport.initialize());
+app.use(passport.session());
 
 module.exports = app;
