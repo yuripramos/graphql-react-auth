@@ -9,7 +9,8 @@ const historyFallback = require("connect-history-api-fallback");
 const webpackHotMiddleware = require("webpack-hot-middleware");
 
 const app = express();
-
+app.use(passport.initialize());
+app.use(passport.session());
 // Replace with your mongoLab URI
 const MONGO_URI =
   "mongodb+srv://teste:yuriramos@cluster0-wwf2m.mongodb.net/test?retryWrites=true&w=majority";
@@ -52,7 +53,5 @@ const hotMiddleware = [
 ];
 
 app.use(hotMiddleware);
-app.use(passport.initialize());
-app.use(passport.session());
 
 module.exports = app;
