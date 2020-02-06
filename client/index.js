@@ -3,12 +3,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Route, Switch, Router } from "react-router-dom";
 import history from "./history";
-
 import ApolloClient from "apollo-client";
 import { ApolloProvider } from "react-apollo";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { HttpLink } from "apollo-link-http";
-
 import App from "./components/App";
 import SongList from "./components/SongList";
 import SongCreate from "./components/SongCreate";
@@ -30,19 +28,7 @@ const Root = () => {
             exact
             path="/"
             render={() => {
-              return <App Wrapped={SongList} />;
-            }}
-          />
-          <Route
-            path="/songs/new"
-            render={() => {
-              return <App Wrapped={SongCreate} />;
-            }}
-          />
-          <Route
-            path="/songs/:id"
-            render={routeProps => {
-              return <App Wrapped={SongDetail} routeProps={routeProps} />;
+              return <App />;
             }}
           />
         </Switch>

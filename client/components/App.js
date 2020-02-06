@@ -1,24 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Header from "./Header";
 
-function App({ Wrapped, routeProps }) {
+const App = props => {
   return (
-    <div className="container">
-      <nav className="nav-extended">
-        <div className="nav-content">
-          <ul className="tabs tabs-transparent">
-            <li className="tab">
-              <Link to={"/"}>Home</Link>
-            </li>
-            <li className="tab">
-              <Link to={"/songs/new"}>New Song</Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <Wrapped routeProps={routeProps} />
+    <div>
+      <Header />
+      {props.children}
     </div>
   );
-}
+};
 
 export default App;
