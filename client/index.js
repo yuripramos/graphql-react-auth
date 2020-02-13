@@ -8,14 +8,16 @@ import { ApolloProvider } from "react-apollo";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { HttpLink } from "apollo-link-http";
 import App from "./components/App";
-import SongList from "./components/SongList";
-import SongCreate from "./components/SongCreate";
-import SongDetail from "./components/SongDetail";
 
 const cache = new InMemoryCache();
 const client = new ApolloClient({
   cache,
-  link: new HttpLink({ uri: "http://localhost:4000/graphql" }),
+  link: new HttpLink({
+    uri: "/graphql",
+    opts: {
+      credentials: "same-origin"
+    }
+  }),
   dataIdFromObject: o => o.id
 });
 
