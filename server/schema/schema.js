@@ -2,7 +2,7 @@ const _ = require("lodash");
 const graphql = require("graphql");
 const { GraphQLSchema } = graphql;
 
-const RootQueryType = require("./types/root_query_type");
+const RootQueryType = require("./types/root_query_type.js");
 const mutations = require("./mutations");
 
 module.exports = new GraphQLSchema({

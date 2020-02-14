@@ -90,7 +90,7 @@ function login({ email, password, req }) {
       if (!user) {
         reject("Invalid credentials.");
       }
-
+      console.log("LOGED IN");
       req.login(user, () => resolve(user));
     })({ body: { email, password } });
   });
