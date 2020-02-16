@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Header from "./Header";
+import Loginform from "./LoginForm";
 
 const App = props => {
   return (
-    <div>
+    <div className="container">
       <Header />
       {props.children}
     </div>
