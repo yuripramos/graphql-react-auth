@@ -8,12 +8,12 @@ import { ApolloProvider } from "react-apollo";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { HttpLink } from "apollo-link-http";
 import App from "./components/App";
-
+import LoginForm from "./components/LoginForm";
 const cache = new InMemoryCache();
 const client = new ApolloClient({
   cache,
   link: new HttpLink({
-    uri: "/graphql",
+    uri: "http://localhost:4000/graphql",
     opts: {
       credentials: "same-origin"
     }
@@ -31,6 +31,13 @@ const Root = () => {
             path="/"
             render={() => {
               return <App />;
+            }}
+          />
+          <Route
+            exact
+            path="/login"
+            render={() => {
+              return <LoginForm />;
             }}
           />
         </Switch>
