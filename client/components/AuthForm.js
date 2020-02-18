@@ -1,19 +1,31 @@
 import React, { useState } from "react";
 
-export const AuthForm = () => {
+export const AuthForm = ({ onSubmit }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const onSubmitHandler = event => {
+    event.preventDefault();
+    onSubmit({ email, password });
+  };
+
   return (
     <div className="row">
-      <form className="col s6">
+      <form onSubmit={onSubmitHandler} className="col s6">
         <div className="input-field">
-          <label> Email </label>
-          <input value={email} onChange={e => setEmail(e.target.value)} />
+          <input
+            value={email}
+            placeholder="Email"
+            onChange={e => setEmail(e.target.value)}
+          />
         </div>
         <div className="input-field">
-          <label>Password</label>
-          <input value={password} onChange={e => setPassword(e.target.value)} />
+          <input
+            value={password}
+            type="password"
+            placeholder="Password"
+            onChange={e => setPassword(e.target.value)}
+          />
         </div>
         <button className="btn">Submit</button>
       </form>

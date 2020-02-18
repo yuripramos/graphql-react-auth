@@ -10,11 +10,9 @@ const Header = ({ data, mutate }) => {
       refetchQueries: [{ query }]
     });
   };
+  console.log("data", data);
   const renderButtons = () => {
     const { loading, user } = data;
-
-    console.log(user);
-
     if (loading) {
       return <div />;
     }
