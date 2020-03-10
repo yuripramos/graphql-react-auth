@@ -8,6 +8,8 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "apollo-boost": "^0.4.7",
+    "apollo-client": "^2.6.8",
     "apollo-server": "^2.2.6",
     "bcryptjs": "^2.4.3",
     "create-react-app": "^3.4.0",

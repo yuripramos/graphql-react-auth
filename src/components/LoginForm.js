@@ -1,9 +1,20 @@
 import React from "react";
 import { Box, Flex, Button } from "rebass";
 import { Label, Input } from "@rebass/forms";
-import { useMutation } from "@apollo/react-hooks";
+import { useApolloClient, useMutation } from "@apollo/react-hooks";
+import { LOGIN } from "../mutations/login";
 
 function LoginForm() {
+  const client = useApolloClient();
+  const [login, { loading, error }] = useMutation(LOGIN, {
+    onCompleted({ login }) {
+      localStorage.setItem("token", login);
+      client.writeData({ data: { isLoggedIn: true } });
+    }
+  });
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>An error occurred</p>;
+
   return (
     <Box
       as="form"
