@@ -24,7 +24,7 @@ function LoginForm() {
   //     client.writeData({ data: { isLoggedIn: true } });
   //   }
   // });
-
+  console.log("useMutation resp", data, error);
   return (
     <Box
       as="form"
