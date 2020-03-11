@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Flex, Button } from "rebass";
 import { Label, Input } from "@rebass/forms";
 import { useApolloClient, useMutation } from "@apollo/react-hooks";
@@ -6,37 +6,65 @@ import { LOGIN } from "../mutations/login";
 
 function LoginForm() {
   const client = useApolloClient();
-  const [login, { loading, error }] = useMutation(LOGIN, {
-    onCompleted({ login }) {
-      localStorage.setItem("token", login);
-      client.writeData({ data: { isLoggedIn: true } });
-    }
-  });
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>An error occurred</p>;
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const variables = { username, password };
+
+  // const [onLoginHandler, { data, loading, error }] = useMutation(LOGIN, {
+  //   onCompleted({ login }) {
+  //     localStorage.setItem("token", login);
+  //     client.writeData({ data: { isLoggedIn: true } });
+  //   }
+  // });
+  const [onLoginHandler, { data, loading, error }] = useMutation(LOGIN);
+
+  // const onLoginHandler = useMutation(LOGIN, {
+  //   onCompleted({ login }) {
+  //     localStorage.setItem("token", login);
+  //     client.writeData({ data: { isLoggedIn: true } });
+  //   }
+  // });
 
   return (
     <Box
       as="form"
-      onSubmit={e => {
-        e.preventDefault();
-      }}
+      onSubmit={e => e.preventDefault()}
       width={[1, 1, 1 / 2]}
       py={3}
     >
       <Flex mx={-2} mb={3}>
         <Box width={1 / 2} px={2}>
           <Label htmlFor="name">Username</Label>
-          <Input id="username" name="username" />
+          <Input
+            id="username"
+            name="username"
+            onBlur={e => {
+              setUsername(e.target.value);
+            }}
+          />
         </Box>
         <Box width={1 / 2} px={2}>
           <Label htmlFor="password">Password</Label>
-          <Input id="password" name="password" type="password" />
+          <Input
+            id="password"
+            name="password"
+            type="password"
+            onBlur={e => {
+              setPassword(e.target.value);
+            }}
+          />
         </Box>
       </Flex>
       <Flex mx={-2} flexWrap="wrap" justifyContent="flex-end">
         <Box px={2}>
-          <Button backgroundColor="#374ef2">Login</Button>
+          <Button
+            onClick={async () => {
+              await onLoginHandler({ variables });
+            }}
+            backgroundColor="#374ef2"
+          >
+            Login
+          </Button>
         </Box>
       </Flex>
     </Box>
