@@ -2,39 +2,47 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import gql from "graphql-tag";
 import * as serviceWorker from "./serviceWorker";
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { HttpLink } from "apollo-link-http";
 import { onError } from "apollo-link-error";
 import { ApolloLink } from "apollo-link";
-import { ApolloProvider as ApolloProviderHooks } from "@apollo/react-hooks";
+import { ApolloProvider } from "@apollo/react-hooks";
 
-const client = new ApolloClient({
-  link: ApolloLink.from([
-    onError(({ graphQLErrors, networkError }) => {
-      if (graphQLErrors)
-        graphQLErrors.forEach(({ message, locations, path }) =>
-          console.log(
-            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-          )
-        );
-      if (networkError) console.log(`[Network error]: ${networkError}`);
-    }),
-    new HttpLink({
-      uri: "http://localhost:3030",
-      credentials: "same-origin"
-    })
-  ]),
-  cache: new InMemoryCache()
+const link = new HttpLink({
+  uri: "http://localhost:3030/"
 });
 
-ReactDOM.render(
-  <ApolloProviderHooks client={client}>
+const cache = new InMemoryCache();
+const client = new ApolloClient({
+  cache,
+  link
+});
+
+const AppWithClientProvider = () => (
+  <ApolloProvider client={client}>
     <App />
-  </ApolloProviderHooks>,
-  document.getElementById("root")
+  </ApolloProvider>
 );
+
+ReactDOM.render(<AppWithClientProvider />, document.getElementById("root"));
+
+client
+  .query({
+    query: gql`
+      query GetLaunch {
+        launch(id: 56) {
+          id
+          mission {
+            name
+          }
+        }
+      }
+    `
+  })
+  .then(result => console.log(result));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -10,13 +10,9 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const variables = { username, password };
 
-  // const [onLoginHandler, { data, loading, error }] = useMutation(LOGIN, {
-  //   onCompleted({ login }) {
-  //     localStorage.setItem("token", login);
-  //     client.writeData({ data: { isLoggedIn: true } });
-  //   }
-  // });
-  const [onLoginHandler, { data, loading, error }] = useMutation(LOGIN);
+  const [loginMutation, { data, loading, error }] = useMutation(LOGIN, {
+    variables
+  });
 
   // const onLoginHandler = useMutation(LOGIN, {
   //   onCompleted({ login }) {
@@ -59,7 +55,7 @@ function LoginForm() {
         <Box px={2}>
           <Button
             onClick={async () => {
-              await onLoginHandler({ variables });
+              loginMutation({ variables });
             }}
             backgroundColor="#374ef2"
           >
