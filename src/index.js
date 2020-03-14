@@ -26,6 +26,18 @@ const AppWithClientProvider = () => (
   </ApolloProvider>
 );
 
+// client
+//   .query({
+//     query: gql`
+//       query {
+//         users {
+//           username
+//         }
+//       }
+//     `
+//   })
+//   .then(result => console.log(result.data));
+
 ReactDOM.render(<AppWithClientProvider />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change

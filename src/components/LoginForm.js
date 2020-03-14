@@ -20,7 +20,10 @@ function LoginForm() {
   //     client.writeData({ data: { isLoggedIn: true } });
   //   }
   // });
+
   console.log("useMutation resp", data, error);
+  console.log("user and pass", username, password);
+
   return (
     <Box
       as="form"
@@ -54,7 +57,7 @@ function LoginForm() {
       <Flex mx={-2} flexWrap="wrap" justifyContent="flex-end">
         <Box px={2}>
           <Button
-            onClick={async () => {
+            onClick={() => {
               loginMutation({ variables });
             }}
             backgroundColor="#374ef2"

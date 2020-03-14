@@ -26,7 +26,6 @@ const server = new ApolloServer({
     const token = tokenWithBearer.split(" ")[1];
     const user = getUser(token);
 
-    //need to make changes here in the prisma client
     return {
       user,
       prisma // the generated prisma client if you are using it
