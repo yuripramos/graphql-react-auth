@@ -1,8 +1,10 @@
+require("dotenv").config();
 import { idArg, makeSchema, objectType, stringArg, asNexusMethod } from 'nexus'
 import { GraphQLDate } from 'graphql-iso-date'
 import { PrismaClient } from '@prisma/client'
 import { graphql } from 'graphql'
 import path from 'path'
+import jwt from 'jsonwebtoken';
 
 export const GQLDate = asNexusMethod(GraphQLDate, 'date')
 
@@ -120,6 +122,35 @@ const Mutation = objectType({
         })
       },
     })
+
+    t.field("loginUser", {
+      type: "User",
+      args: {
+        name: stringArg(),
+        email: stringArg({ nullable: false })
+      },
+      resolve: async (_, { name, email }, ctx) => {
+
+        const user = await ctx.prisma.user({ name })
+
+        // if (!user) {
+        //   throw new Error("Invalid Login");
+        // }
+
+        // const token = jwt.sign(
+        //   {
+        //     id: user.id,
+        //     username: email
+        //   },
+        //   process.env.SECRET_KET,
+        //   {
+        //     expiresIn: "30d"
+        //   }
+        // );
+
+        return user
+      }
+    });
 
     t.field('deletePost', {
       type: 'Post',

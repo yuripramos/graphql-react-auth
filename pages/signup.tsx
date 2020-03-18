@@ -15,26 +15,36 @@ const SignupMutation = gql`
   }
 `
 
+const LoginMutation = gql`
+  mutation LoginMutation($name: String, $email: String!) {
+    loginUser(name: $name, email: $email) {
+      id
+      name
+      email
+    }
+  }
+`; 
+
 function Signup(props) {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
 
   const [signup] = useMutation(SignupMutation)
-
+  const [login] = useMutation(LoginMutation)
   return (
     <Layout>
       <div>
         <form
           onSubmit={async e => {
             e.preventDefault()
-            console.log('submit', name, email)
+            console.log('submit with login mutation', name, email)
 
-            await signup({
+            await login({
               variables: {
                 name: name,
-                email: email,
-              },
-            })
+                email: email
+              }
+            });
             Router.push('/')
           }}>
           <h1>Signup user</h1>
@@ -47,7 +57,7 @@ function Signup(props) {
           />
           <input
             onChange={e => setEmail(e.target.value)}
-            placeholder="Email address)"
+            placeholder="Email address"
             type="text"
             value={email}
           />
@@ -78,6 +88,12 @@ function Signup(props) {
           border: 0;
           padding: 1rem 2rem;
         }
+
+        input[type='submit']:hover {
+          background: #DCDCDC;
+          cursor: pointer;
+        }
+        
 
         .back {
           margin-left: 1rem;
