@@ -5,22 +5,21 @@ import { withApollo } from '../apollo/client'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 
-const SignupMutation = gql`
-  mutation SignupMutation($name: String, $email: String!) {
-    signupUser(name: $name, email: $email) {
+const LoginMutation = gql`
+  mutation LoginMutation($name: String, $email: String!) {
+    loginUser(name: $name, email: $email) {
       id
       name
       email
     }
   }
-`
+`; 
 
-
-function Signup(props) {
-  const [name, setName] = useState('')
+function Login(props) {
+  const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
 
-  const [signup] = useMutation(SignupMutation)
+  const [login] = useMutation(LoginMutation)
   
   return (
     <Layout>
@@ -29,29 +28,29 @@ function Signup(props) {
           onSubmit={async e => {
             e.preventDefault();
 
-            await signup({
+            await login({
               variables: {
-                name: name,
-                email: email
+                email: email,
+                password: password
               }
             });
             Router.push('/')
           }}>
-          <h1>Signup user</h1>
+          <h1>Login user</h1>
           <input
             autoFocus
-            onChange={e => setName(e.target.value)}
-            placeholder="Name"
-            type="text"
-            value={name}
-          />
-          <input
             onChange={e => setEmail(e.target.value)}
-            placeholder="Email address"
+            placeholder="Email"
             type="text"
             value={email}
           />
-          <input disabled={!name || !email} type="submit" value="Signup" />
+          <input
+            onChange={e => setPassword(e.target.value)}
+            placeholder="Password"
+            type="text"
+            value={password}
+          />
+          <input disabled={!password || !email} type="submit" value="Login" />
           <a className="back" href="#" onClick={() => Router.push('/')}>
             or Cancel
           </a>
@@ -74,13 +73,13 @@ function Signup(props) {
         }
 
         input[type='submit'] {
-          background: #ececec;
+          background: #ecddec;
           border: 0;
           padding: 1rem 2rem;
         }
 
         input[type='submit']:hover {
-          background: #DCDCDC;
+          background: #DC00DC;
           cursor: pointer;
         }
         
@@ -93,4 +92,4 @@ function Signup(props) {
   )
 }
 
-export default withApollo(Signup)
+export default withApollo(Login)

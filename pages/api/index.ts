@@ -114,6 +114,7 @@ const Mutation = objectType({
         email: stringArg({ nullable: false }),
       },
       resolve: (_, { name, email }, ctx) => {
+        console.log("singup mutation");
         return prisma.user.create({
           data: {
             name,
@@ -130,13 +131,14 @@ const Mutation = objectType({
         email: stringArg({ nullable: false })
       },
       resolve: async (_, { name, email }, ctx) => {
+        const user = await ctx.prisma.user({ name });
 
-        const user = await ctx.prisma.user({ name })
-
-        // if (!user) {
-        //   throw new Error("Invalid Login");
-        // }
-
+        if (!user) {
+          throw new Error("Invalid Login");
+        }
+        else {
+          console.log("user exist");
+        }
         // const token = jwt.sign(
         //   {
         //     id: user.id,
@@ -147,8 +149,7 @@ const Mutation = objectType({
         //     expiresIn: "30d"
         //   }
         // );
-
-        return user
+        return user;
       }
     });
 
