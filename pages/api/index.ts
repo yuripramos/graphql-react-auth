@@ -1,14 +1,24 @@
 require("dotenv").config();
+import { compare, hash } from 'bcryptjs'
 import { idArg, makeSchema, objectType, stringArg, asNexusMethod } from 'nexus'
 import { GraphQLDate } from 'graphql-iso-date'
 import { PrismaClient } from '@prisma/client'
 import { graphql } from 'graphql'
 import path from 'path'
-import jwt from 'jsonwebtoken';
+import {sign} from 'jsonwebtoken';
+import { APP_SECRET, getUserId } from "./utils";
 
 export const GQLDate = asNexusMethod(GraphQLDate, 'date')
 
 const prisma = new PrismaClient()
+
+const AuthPayload = objectType({
+  name: "AuthPayload",
+  definition(t) {
+    t.string("token");
+    t.field("user", { type: "User" });
+  }
+});
 
 const User = objectType({
   name: 'User',
@@ -107,22 +117,29 @@ const Query = objectType({
 const Mutation = objectType({
   name: 'Mutation',
   definition(t) {
-    t.field('signupUser', {
-      type: 'User',
+    t.field("signupUser", {
+      type: "AuthPayload",
       args: {
         name: stringArg(),
         email: stringArg({ nullable: false }),
+        password: stringArg({ nullable: false })
       },
-      resolve: (_, { name, email }, ctx) => {
+      resolve: async (_, { name, email, password }, ctx) => {
         console.log("singup mutation");
-        return prisma.user.create({
+        const hashedPassword = await hash(password, 10);
+        const user = await ctx.prisma.user.create({
           data: {
             name,
             email,
-          },
-        })
+            password: hashedPassword
+          }
+        });
+        return {
+          token: sign({ userId: user.id }, APP_SECRET),
+          user
+        };
       },
-    })
+    });
 
     t.field("loginUser", {
       type: "User",
@@ -204,7 +221,7 @@ const Mutation = objectType({
 })
 
 export const schema = makeSchema({
-  types: [Query, Mutation, Post, User, GQLDate],
+  types: [Query, Mutation, Post, User, GQLDate, AuthPayload],
   outputs: {
     typegen: path.join(__dirname, 'nexus-typegen.ts'),
     schema: path.join(__dirname, 'schema.graphql')

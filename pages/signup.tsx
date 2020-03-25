@@ -19,6 +19,7 @@ const SignupMutation = gql`
 function Signup(props) {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const [signup] = useMutation(SignupMutation)
   
@@ -32,7 +33,8 @@ function Signup(props) {
             await signup({
               variables: {
                 name: name,
-                email: email
+                email: email,
+                password: password
               }
             });
             Router.push('/')
@@ -50,6 +52,13 @@ function Signup(props) {
             placeholder="Email address"
             type="text"
             value={email}
+          />
+          <input
+            autoFocus
+            onChange={e => setPassword(e.target.value)}
+            placeholder="Password"
+            type="password"
+            value={password}
           />
           <input disabled={!name || !email} type="submit" value="Signup" />
           <a className="back" href="#" onClick={() => Router.push('/')}>
