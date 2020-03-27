@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "strict": true,
+    "module": "commonjs",
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "components",
+    "pages",
+    "apollo",
+  ]
+}

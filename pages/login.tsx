@@ -6,11 +6,9 @@ import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 
 const LoginMutation = gql`
-  mutation LoginMutation($name: String, $email: String!) {
-    loginUser(name: $name, email: $email) {
-      id
-      name
-      email
+  mutation LoginMutation($email: String, $password: String!) {
+    loginUser(email: $email, password: $password) {
+      token
     }
   }
 `; 
