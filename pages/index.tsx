@@ -19,7 +19,19 @@ const FeedQuery = gql`
   }
 `
 
-const Post = ({ post }) => (
+export interface Item {
+  content: string;
+  author: string;
+  title: string;
+  name: string
+}
+
+export interface Post {
+  post: {
+    [key: string]: Item
+  };
+}
+const Post = ({ post }: Post) => (
   <Link href="/p/[id]" as={`/p/${post.id}`}>
     <a>
       <h2>{post.title}</h2>
@@ -37,7 +49,7 @@ const Post = ({ post }) => (
   </Link>
 )
 
-const Blog = () => {
+const Blog = ({ post }: Post) => {
   const { loading, error, data } = useQuery(FeedQuery)
 
   if (loading) {
