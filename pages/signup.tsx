@@ -7,7 +7,7 @@ import { useMutation } from '@apollo/react-hooks'
 
 const SignupMutation = gql`
   mutation SignupMutation($name: String, $email: String!, $password: String!) {
-    signupUser(name: $name, email: $email, password: $password) {
+    signup(name: $name, email: $email, password: $password) {
       token
     }
   }
@@ -28,6 +28,7 @@ function Signup(props) {
           onSubmit={async e => {
             e.preventDefault();
 
+            console.log(name, email, password);
             await signup({
               variables: {
                 name: name,
@@ -72,7 +73,7 @@ function Signup(props) {
           justify-content: center;
         }
 
-        input[type='text'] {
+        input[type='text'], input[type='password'] {
           width: 100%;
           padding: 0.5rem;
           margin: 0.5rem 0;

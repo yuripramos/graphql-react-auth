@@ -6,12 +6,12 @@ import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 
 const LoginMutation = gql`
-  mutation LoginMutation($email: String, $password: String!) {
-    loginUser(email: $email, password: $password) {
+  mutation LoginMutation($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
       token
     }
   }
-`; 
+` 
 
 function Login(props) {
   const [password, setPassword] = useState('')
@@ -45,7 +45,7 @@ function Login(props) {
           <input
             onChange={e => setPassword(e.target.value)}
             placeholder="Password"
-            type="text"
+            type="password"
             value={password}
           />
           <input disabled={!password || !email} type="submit" value="Login" />
@@ -62,7 +62,7 @@ function Login(props) {
           justify-content: center;
         }
 
-        input[type='text'] {
+        input[type='text'], input[type='password'] {
           width: 100%;
           padding: 0.5rem;
           margin: 0.5rem 0;

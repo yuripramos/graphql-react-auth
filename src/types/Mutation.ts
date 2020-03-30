@@ -21,6 +21,7 @@ export const Mutation = mutationType({
             password: hashedPassword,
           },
         })
+        console.log("inside singup mutation", user);
         return {
           token: sign({ userId: user.id }, APP_SECRET),
           user,
