@@ -49,7 +49,7 @@ const Post = ({ post }: Post) => (
   </Link>
 )
 
-const Blog = ({ post }: Post) => {
+const Blog = () => {
   const { loading, error, data } = useQuery(FeedQuery)
 
   if (loading) {

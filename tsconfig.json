@@ -2,6 +2,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "./",
+    "noImplicitAny":false,
     "lib": [
       "esnext",
       "dom"
