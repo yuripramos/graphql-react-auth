@@ -1,6 +1,6 @@
-<p align="center">
+<h2 align="center">
   apollo-graphql-react-auth
-</p>
+</h2>
 
 <h4 align="center">
   Single Page App with authentication & Permissions
@@ -10,7 +10,7 @@
   Build with powerful React 16.8 and <em>hooks</em> ⚡️
 </p>
 
-<p align="center">
+<p align="left">
   <a href="https://github.com/Nozbe/WatermelonDB/blob/master/LICENSE">
     <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License">
   </a>
@@ -24,11 +24,11 @@
 |   | Specs |
 | - | ------------ |
 | ⚡️ | **Apollo-client** no matter how much data you have |
-| 📈 | **GraphqlQL** from hundreds to tens of thousands of records |
-| 😎 | **React 16.12**. Only load data when you need it |
+| 📈 | **GraphqQL** from hundreds to tens of thousands of records |
+| ⚛️ | **React 16.12**. Only load data when you need it |
 | ✨ | **React Hooks** API with [RxJS](https://github.com/ReactiveX/rxjs) |
-| 📱 | **Prisma**. iOS, Android, and the web |
-| ⚛️ | **TypeScript** Easily plug data into components |
+| 🛆 | **Prisma**. iOS, Android, and the web |
+| 😎 | **TypeScript** Easily plug data into components |
 | ⏱ | Fast. Async. Multi-threaded. Highly cached. |
 | 🔗 | Relational. Built on rock-solid [SQLite](https://www.sqlite.org) foundation |
 | 🔄 | **Offline-first.** [Sync](https://nozbe.github.io/WatermelonDB/Advanced/Sync.html) with your own backend |
@@ -46,11 +46,11 @@ sadasds fixes it **by being lazy**. s simply dummy text of the printing and type
 
 ## Usage
 
-**Create blog posts:** an app with posts and comments.
-**See your blog posts** an app with posts and comments.
-**Save blog drafts:** an app with posts and comments.
-**Signup user:** an app with posts and comments.
-**Authenticate user:** an app with posts and comments.
+**Create blog posts:** an app with posts and comments.</br>
+**See your blog posts** an app with posts and comments.</br>
+**Save blog drafts:** an app with posts and comments.</br>
+**Signup user:** an app with posts and comments.</br>
+**Authenticate user:** an app with posts and comments.</br>
 
 First, you define Models:
 
