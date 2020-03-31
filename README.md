@@ -10,7 +10,7 @@
   Build with powerful React 16.8 and <em>hooks</em> ⚡️
 </p>
 
-<p align="left">
+<p align="center">
   <a href="https://github.com/Nozbe/WatermelonDB/blob/master/LICENSE">
     <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License">
   </a>
@@ -24,14 +24,14 @@
 |   | Specs |
 | - | ------------ |
 | ⚡️ | **Apollo-client** no matter how much data you have |
-| 📈 | **GraphqQL** from hundreds to tens of thousands of records |
+| 📈 | **GraphQL** from hundreds to tens of thousands of records |
 | ⚛️ | **React 16.12**. Only load data when you need it |
 | ✨ | **React Hooks** API with [RxJS](https://github.com/ReactiveX/rxjs) |
 | 🛆 | **Prisma**. iOS, Android, and the web |
 | 😎 | **TypeScript** Easily plug data into components |
 | ⏱ | Fast. Async. Multi-threaded. Highly cached. |
 | 🔗 | Relational. Built on rock-solid [SQLite](https://www.sqlite.org) foundation |
-| 🔄 | **Offline-first.** [Sync](https://nozbe.github.io/WatermelonDB/Advanced/Sync.html) with your own backend |
+| 🔄 | **graphql-shield** [Sync](https://nozbe.github.io/WatermelonDB/Advanced/Sync.html) with your own backend |
 
 ## Purpose?
 
@@ -120,6 +120,6 @@ If you make or are considering making an app using WatermelonDB, please let us k
 
 ## Author and license
 
-**WatermelonDB** was created by [@yuripramos](https://github.com/yuripramos).
+**project name** was created by [@yuripramos](https://github.com/yuripramos).
 
 This project is available under the MIT license. See the [LICENSE file](./LICENSE) for more info.

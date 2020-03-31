@@ -19,6 +19,7 @@ const FeedQuery = gql`
   }
 `
 
+
 export interface Item {
   content: string;
   author: string;
@@ -51,7 +52,7 @@ const Post = ({ post }: Post) => (
 
 const Blog = () => {
   const { loading, error, data } = useQuery(FeedQuery)
-
+  
   if (loading) {
     return <div>Loading ...</div>
   }

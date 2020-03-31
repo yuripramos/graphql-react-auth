@@ -3,7 +3,7 @@ import Layout from '../components/Layout'
 import Router from 'next/router'
 import { withApollo } from '../apollo/client'
 import gql from 'graphql-tag'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation, useQuery } from '@apollo/react-hooks'
 
 const LoginMutation = gql`
   mutation LoginMutation($email: String!, $password: String!) {
@@ -13,25 +13,40 @@ const LoginMutation = gql`
   }
 ` 
 
+
+const isAuthenticated = gql`
+  query isAuthenticated($token: String) {
+    me(token: $token) {
+      id
+      name
+      email
+    }
+  }
+`
+
 function Login(props) {
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
 
-  const [login] = useMutation(LoginMutation)
-  
+  const [login, { data }] = useMutation(LoginMutation, {
+    refetchQueries: [{ query: isAuthenticated, variables: { token:`Authorization ${data.login.token}` } }],
+  })
+
+
   return (
     <Layout>
       <div>
         <form
           onSubmit={async e => {
             e.preventDefault();
-
+            
             await login({
               variables: {
                 email: email,
-                password: password
+                password: password,
               }
-            });
+            })
+              
             Router.push('/')
           }}>
           <h1>Login user</h1>

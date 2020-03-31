@@ -4,6 +4,7 @@ import { getUserId } from '../utils'
 const rules = {
   isAuthenticatedUser: rule()((parent, args, context) => {
     const userId = getUserId(context)
+    console.log("called isAuthenticatedUser")
     return Boolean(userId)
   }),
   isPostOwner: rule()(async (parent, { id }, context) => {
