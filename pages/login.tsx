@@ -3,7 +3,8 @@ import Layout from '../components/Layout'
 import Router from 'next/router'
 import { withApollo } from '../apollo/client'
 import gql from 'graphql-tag'
-import { useMutation, useQuery } from '@apollo/react-hooks'
+import { useMutation, useQuery, useApolloClient } from '@apollo/react-hooks'
+
 
 const LoginMutation = gql`
   mutation LoginMutation($email: String!, $password: String!) {
@@ -14,24 +15,18 @@ const LoginMutation = gql`
 ` 
 
 
-const isAuthenticated = gql`
-  query isAuthenticated($token: String) {
-    me(token: $token) {
-      id
-      name
-      email
-    }
-  }
-`
-
 function Login(props) {
+  const client = useApolloClient()
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
 
-  const [login, { data }] = useMutation(LoginMutation, {
-    refetchQueries: [{ query: isAuthenticated, variables: { token:`Authorization ${data.login.token}` } }],
+  const [login] = useMutation(LoginMutation, {
+    onCompleted(data) {
+      document.cookie = `token=${data.login.token}; path=/`
+      console.log("setou cookie");
+      // client.writeData({ data: { isLoggedIn: true } })
+    }
   })
-
 
   return (
     <Layout>

@@ -4,9 +4,10 @@ import { ApolloProvider } from '@apollo/react-hooks'
 import { ApolloClient } from 'apollo-client'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import fetch from 'isomorphic-unfetch'
+import cookies from 'next-cookies'
 
 let apolloClient = null
-
+let token = undefined
 /**
  * Creates and provides the apolloContext
  * to a next.js PageTree. Use it by wrapping
@@ -40,7 +41,7 @@ export function withApollo(PageComponent, { ssr = true } = {}) {
   if (ssr || PageComponent.getInitialProps) {
     WithApollo.getInitialProps = async ctx => {
       const { AppTree } = ctx
-
+      token = cookies(ctx).token || ''
       // Initialize ApolloClient, add it to the ctx object so
       // we can use it in `PageComponent.getInitialProp`.
       const apolloClient = (ctx.apolloClient = initApolloClient())
@@ -125,6 +126,13 @@ function createApolloClient(initialState = {}) {
   const ssrMode = typeof window === 'undefined'
   const cache = new InMemoryCache().restore(initialState)
 
+  // cache.writeData({
+  //   data: {
+  //     isLoggedIn: !!localStorage.getItem('token'),
+  //     testVariable: [],
+  //   },
+  // })
+
   return new ApolloClient({
     ssrMode,
     link: createIsomorphLink(),
@@ -135,6 +143,7 @@ function createApolloClient(initialState = {}) {
 function createIsomorphLink() {
   const { HttpLink } = require('apollo-link-http')
   return new HttpLink({
+    headers: { authorization: `Bearer ${token}` },
     uri: 'http://localhost:4000',
     credentials: 'same-origin',
   })

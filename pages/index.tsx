@@ -18,7 +18,15 @@ const FeedQuery = gql`
     }
   }
 `
-
+const isAuthenticatedQuery = gql`
+  query isAuthenticatedQuery {
+    me {
+      id
+      name
+      email
+    }
+  }
+`
 
 export interface Item {
   content: string;
@@ -52,7 +60,9 @@ const Post = ({ post }: Post) => (
 
 const Blog = () => {
   const { loading, error, data } = useQuery(FeedQuery)
-  
+  const isAuthenticated = useQuery(isAuthenticatedQuery)
+
+  console.log('IS AUTHENTICATED?', isAuthenticated)
   if (loading) {
     return <div>Loading ...</div>
   }
