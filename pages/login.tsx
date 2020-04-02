@@ -12,7 +12,7 @@ const LoginMutation = gql`
       token
     }
   }
-` 
+`
 
 
 function Login(props) {
@@ -23,8 +23,6 @@ function Login(props) {
   const [login] = useMutation(LoginMutation, {
     onCompleted(data) {
       document.cookie = `token=${data.login.token}; path=/`
-      console.log("setou cookie");
-      // client.writeData({ data: { isLoggedIn: true } })
     }
   })
 
@@ -34,14 +32,14 @@ function Login(props) {
         <form
           onSubmit={async e => {
             e.preventDefault();
-            
+
             await login({
               variables: {
                 email: email,
                 password: password,
               }
             })
-              
+
             Router.push('/')
           }}>
           <h1>Login user</h1>

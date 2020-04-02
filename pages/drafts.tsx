@@ -1,23 +1,9 @@
 import Layout from '../components/Layout'
 import Link from 'next/link'
 import { withApollo } from '../apollo/client'
-import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
+import { DraftsQuery } from '../queries';
 
-const DraftsQuery = gql`
-  query DraftsQuery {
-    drafts {
-      id
-      title
-      content
-      published
-      author {
-        id
-        name
-      }
-    }
-  }
-`
 
 const Post = ({ post }) => (
   <Link href="/p/[id]" as={`/p/${post.id}`}>

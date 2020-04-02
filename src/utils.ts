@@ -12,10 +12,6 @@ export function getUserId(context: Context) {
   if (Authorization) {
     const token = Authorization.replace('Bearer ', '')
     const verifiedToken = verify(token, APP_SECRET) as Token
-    console.log(
-      'está dentro do userId, verificando token',
-      verifiedToken && verifiedToken.userId,
-    )
     return verifiedToken && verifiedToken.userId
   }
 }

@@ -1,32 +1,9 @@
 import Layout from '../components/Layout'
 import Link from 'next/link'
 import { withApollo } from '../apollo/client'
-import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
+import { FeedQuery, isAuthenticatedQuery } from '../queries';
 
-const FeedQuery = gql`
-  query FeedQuery {
-    feed {
-      id
-      title
-      content
-      published
-      author {
-        id
-        name
-      }
-    }
-  }
-`
-const isAuthenticatedQuery = gql`
-  query isAuthenticatedQuery {
-    me {
-      id
-      name
-      email
-    }
-  }
-`
 
 export interface Item {
   content: string
@@ -73,7 +50,7 @@ const Blog = () => {
   return (
     <Layout>
       <div className="page">
-        {isAuthenticated ? (
+        {!!isAuthenticated ? (
           <h1> Welcome back {isAuthenticated.me.name} </h1>
         ) : (
             <h1>My Blog</h1>
@@ -87,6 +64,10 @@ const Blog = () => {
         </main>
       </div>
       <style jsx>{`
+
+        h1 {
+          text-transform: capitalize;
+        }
         .post {
           background: white;
           transition: box-shadow 0.1s ease-in;
