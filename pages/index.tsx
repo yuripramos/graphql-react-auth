@@ -29,16 +29,16 @@ const isAuthenticatedQuery = gql`
 `
 
 export interface Item {
-  content: string;
-  author: string;
-  title: string;
+  content: string
+  author: string
+  title: string
   name: string
 }
 
 export interface Post {
   post: {
     [key: string]: Item
-  };
+  }
 }
 const Post = ({ post }: Post) => (
   <Link href="/p/[id]" as={`/p/${post.id}`}>
@@ -60,7 +60,7 @@ const Post = ({ post }: Post) => (
 
 const Blog = () => {
   const { loading, error, data } = useQuery(FeedQuery)
-  const isAuthenticated = useQuery(isAuthenticatedQuery)
+  const isAuthenticated = useQuery(isAuthenticatedQuery).data
 
   console.log('IS AUTHENTICATED?', isAuthenticated)
   if (loading) {
@@ -73,7 +73,11 @@ const Blog = () => {
   return (
     <Layout>
       <div className="page">
-        <h1>My Blog</h1>
+        {isAuthenticated ? (
+          <h1> Welcome back {isAuthenticated.me.name} </h1>
+        ) : (
+            <h1>My Blog</h1>
+          )}
         <main>
           {data.feed.map(post => (
             <div className="post">
