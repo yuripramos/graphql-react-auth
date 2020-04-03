@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import Layout from '../components/Layout'
 import Link from 'next/link'
 import { withApollo } from '../apollo/client'
@@ -37,9 +38,10 @@ const Post = ({ post }: Post) => (
 
 const Blog = () => {
   const { loading, error, data } = useQuery(FeedQuery)
+
   const isAuthenticated = useQuery(isAuthenticatedQuery).data
 
-  console.log('IS AUTHENTICATED?', isAuthenticated)
+  console.log('IS AUTHENTICATED? INDEX', isAuthenticated)
   if (loading) {
     return <div>Loading ...</div>
   }

@@ -2,14 +2,23 @@ import { Fragment } from 'react'
 import Link from 'next/link'
 import { isAuthenticatedQuery } from '../queries'
 import { useQuery } from '@apollo/react-hooks'
+import Router from 'next/router'
+import Cookies from 'js-cookie'
+
 function isActive(pathname) {
   return (
     typeof document !== 'undefined' && document.location.pathname === pathname
   )
 }
 
+function removeSession() {
+  Cookies.remove('token', { path: '' })
+  Router.push('/')
+}
+
 const Header = () => {
   const isAuthenticated = useQuery(isAuthenticatedQuery).data
+  console.log('rendered header', isAuthenticated)
   return (
     <nav>
       <div className="left">
@@ -26,8 +35,8 @@ const Header = () => {
             <Link href="/create">
               <a data-active={isActive('/create')}>+ Create draft</a>
             </Link>
-            <Link href="/logout">
-              <a data-active={isActive('/create')}>Logout</a>
+            <Link href="/login">
+              <a onClick={() => removeSession()}>Logout</a>
             </Link>
           </Fragment>
         ) : (
@@ -73,16 +82,15 @@ const Header = () => {
         }
 
         .right a {
-          border: 1px solid #797979;
           padding: 0.5rem 1rem;
           border-radius: 5px;
-          background: hsla(0, 50%, 58%, 0.79);
+          background: hsla(0, 89%, 63%, 0.79);
           color: white;
           font-weight: 500;
         }
 
         .right a:hover {
-          background: hsla(0, 50%, 58%);
+          background: hsl(0, 72%, 54%);
         }
       `}</style>
     </nav>

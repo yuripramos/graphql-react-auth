@@ -15,7 +15,7 @@ const Post = ({ post }) => (
         a {
           text-decoration: none;
           color: inherit;
-          padding: 2rem;
+          padding: 1.4rem;
           display: block;
         }
       `}</style>
@@ -39,8 +39,8 @@ const Drafts = () => {
         <h1>Drafts</h1>
         <main>
           {data.drafts.map(post => (
-            <div className="post">
-              <Post key={post.id} post={post} />
+            <div className="post" key={post.id} >
+              <Post post={post} />
             </div>
           ))}
         </main>
