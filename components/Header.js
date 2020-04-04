@@ -18,7 +18,7 @@ function removeSession() {
 
 const Header = () => {
   const isAuthenticated = useQuery(isAuthenticatedQuery).data
-  console.log('rendered header', isAuthenticated)
+
   return (
     <nav>
       <div className="left">

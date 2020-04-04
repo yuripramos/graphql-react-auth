@@ -39,9 +39,11 @@ const Post = ({ post }: Post) => (
 const Blog = () => {
   const { loading, error, data } = useQuery(FeedQuery)
 
-  const isAuthenticated = useQuery(isAuthenticatedQuery).data
+  const { loading: loadingAuth, data: dataAuth, error: errorAuth } = useQuery(isAuthenticatedQuery)
 
-  console.log('IS AUTHENTICATED? INDEX', isAuthenticated)
+  console.log("data auth", dataAuth, loadingAuth, errorAuth);
+
+
   if (loading) {
     return <div>Loading ...</div>
   }
@@ -52,8 +54,8 @@ const Blog = () => {
   return (
     <Layout>
       <div className="page">
-        {!!isAuthenticated ? (
-          <h1> Welcome back {isAuthenticated.me.name} </h1>
+        {!!dataAuth && !loadingAuth ? (
+          <h1> Welcome back {dataAuth.me.name} </h1>
         ) : (
             <h1>My Blog</h1>
           )}

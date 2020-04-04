@@ -126,13 +126,6 @@ function createApolloClient(initialState = {}) {
   const ssrMode = typeof window === 'undefined'
   const cache = new InMemoryCache().restore(initialState)
 
-  // cache.writeData({
-  //   data: {
-  //     isLoggedIn: !!localStorage.getItem('token'),
-  //     testVariable: [],
-  //   },
-  // })
-
   return new ApolloClient({
     ssrMode,
     link: createIsomorphLink(),
@@ -143,7 +136,7 @@ function createApolloClient(initialState = {}) {
 function createIsomorphLink() {
   const { HttpLink } = require('apollo-link-http')
   return new HttpLink({
-    headers: { authorization: `Bearer ${token}` },
+    headers: { Authorization: `Bearer ${token}` },
     uri: 'http://localhost:4000',
     credentials: 'same-origin',
   })
