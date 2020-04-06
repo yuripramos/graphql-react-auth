@@ -1,9 +1,9 @@
 <h2 align="center">
-  apollo-graphql-react-auth
+  the-authentication-app
 </h2>
 
 <h4 align="center">
-  Single Page App with authentication & Permissions
+  Single Page App with Authentication & Permissions
 </h4>
 
 <p align="center">
@@ -15,111 +15,70 @@
     <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License">
   </a>
 
-  <!-- <a href="https://travis-ci.com/Nozbe/WatermelonDB">
-    <img src="https://api.travis-ci.com/Nozbe/WatermelonDB.svg?branch=master" alt="CI Status">
-  </a> -->
-
 </p>
 
 |   | Specs |
 | - | ------------ |
-| ⚡️ | **Apollo-client** no matter how much data you have |
-| 📈 | **GraphQL** from hundreds to tens of thousands of records |
-| ⚛️ | **React 16.12**. Only load data when you need it |
-| ✨ | **React Hooks** API with [RxJS](https://github.com/ReactiveX/rxjs) |
-| 🛆 | **Prisma**. iOS, Android, and the web |
-| 😎 | **TypeScript** Easily plug data into components |
+| ⚡️ | **Apollo-client**  State management library |
+| 📈 | **GraphQL** GraphQL is a query language and execution engine tied to any backend service |
+| ⚛️ | **React 16.12**. Latest stable version of react |
+| ✨ | **React Hooks**  [React hooks](https://reactjs.org/docs/hooks-intro.html) |
+| 💎 | **Prisma**. GraphQL server with any database |
+| 😎 | **TypeScript** JavaScript that scales.s |
+| 🛡 | **GraphQL-Shield** [Shield](https://github.com/maticzav/graphql-shield) A GraphQL tool to ease the creation of permission layer. |
 | ⏱ | Fast. Async. Multi-threaded. Highly cached. |
-| 🔗 | Relational. Built on rock-solid [SQLite](https://www.sqlite.org) foundation |
-| 🔄 | **graphql-shield** [Sync](https://nozbe.github.io/WatermelonDB/Advanced/Sync.html) with your own backend |
 
 ## Purpose?
 
-**Text1** is a new way of dealing with user data in React Native and React web apps.
+**Authenticate** app using prisma and SSR.
 
-It's optimized for building **complex applications** in React Native, and the number one goal is **real-world performance**. In simple words, _your app must launch fast_.
+It's optimized to **complex applications** if you want to fork in your project and adapt according your needs. This is a  **real-world example**.
 
-For simple apps, using Redux or MobX with a persistence adapter is the easiest way to go. But when you start scaling to thousands or tens of thousands of database records, your app will now be slow to launch (especially on slower Android devices). Loading a full database into JavaScript is expensive!
-
-sadasds fixes it **by being lazy**. s simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the [SQLite database](https://www.sqlite.org/index.html)  will be distracted by the readable content of a page when looking at its layout.
+For simple apps, using third-party authentication is enough but sometimes you want to have control about you are using and don't want use only OAuth or other authentications. Made with TypeScript and reusable components you can adapt this to **any** kind of of project. With prisma things got way more easier and you don't need anymora a back-end environment to build from the scratch an authentication.
 
 
 ## Usage
 
-**Create blog posts:** an app with posts and comments.</br>
-**See your blog posts** an app with posts and comments.</br>
-**Save blog drafts:** an app with posts and comments.</br>
-**Signup user:** an app with posts and comments.</br>
-**Authenticate user:** an app with posts and comments.</br>
+**Create blog posts:** Create posts</br>
+**See your blog posts** See your posts</br>
+**Save blog drafts:** Save your drafts</br>
+**Signup user:** Signup</br>
+**Authenticate user:** Login the existent user</br>
 
-First, you define Models:
-
-```js
-class Post extends Model {
-  @field('name') name
-  @field('body') body
-  @children('comments') comments
-}
-
-class Comment extends Model {
-  @field('body') body
-  @field('author') author
-}
-```
+First, install 
 
 ```js
-const Comment = ({ comment }) => (
-  <View style={styles.commentBox}>
-    <Text>{comment.body} — by {comment.author}</Text>
-  </View>
-)
+npm install or yarn 
 
-// This is how you make your app reactive! ✨
-const enhance = withObservables(['comment'], ({ comment }) => ({
-  comment: comment.observe()
-}))
-const EnhancedComment = enhance(Comment)
 ```
-
-And now you can render the whole Post:
+then, run your server
 
 ```js
-const Post = ({ post, comments }) => (
-  <View>
-    <Text>{post.name}</Text>
-    <Text>Comments:</Text>
-    {comments.map(comment =>
-      <Comment key={comment.id} comment={comment} />
-    )}
-  </View>
-)
-
-const enhance = withObservables(['post'], ({ post }) => ({
-  post,
-  comments: post.comments
-}))
+npm run dev or yarn dev
 ```
+
+and last, run the client
+
+
+```js
+npm run client or yarn client
+```
+
+
 **Prisma 🛆**
 
-The result is fully reactive! Whenever a post or comment is added, changed, or removed, the right components **will automatically re-render** on screen. Doesn't matter if a change occurred in a totally different part of the app, it all just works out of the box!
+Prisma Client JS is an auto-generated query builder that enables type-safe database access and reduces boilerplate. You can use it as an alternative to traditional ORMs such as Sequelize, TypeORM or SQL query builders like knex.js.
 
-### ➡️ **Learn more:** [see full documentation](https://nozbe.github.io/WatermelonDB/)
+### ➡️ **Learn more:** [see full documentation](https://github.com/prisma/prisma-client-js)
 
 
 ## Contributing
-
-<img src="https://github.com/Nozbe/WatermelonDB/raw/master/assets/needyou.jpg" alt="We need you" width="220" />
-
-**some text about contributing**
-
-If there's a missing feature, a bug, or other improvement you'd like, I encourage you to contribute! Feel free to open an issue to get some guidance and see [Contributing guide](./CONTRIBUTING.md) for details about project setup, testing, etc.
+The project focuses on being lightweight and minimal; pull requests will likely not be merged. Bug reports and questions are welcome.
 
 
-
-If you make or are considering making an app using WatermelonDB, please let us know!
 
 ## Author and license
 
-**project name** was created by [@yuripramos](https://github.com/yuripramos).
+**the-authentication-app** was created by [@yuripramos](https://github.com/yuripramos).
 
 This project is available under the MIT license. See the [LICENSE file](./LICENSE) for more info.
