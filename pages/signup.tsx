@@ -20,7 +20,7 @@ function Signup(props) {
   const [password, setPassword] = useState('')
 
   const [signup] = useMutation(SignupMutation)
-  
+
   return (
     <Layout>
       <div>
@@ -28,7 +28,6 @@ function Signup(props) {
           onSubmit={async e => {
             e.preventDefault();
 
-            console.log(name, email, password);
             await signup({
               variables: {
                 name: name,

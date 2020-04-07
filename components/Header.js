@@ -26,7 +26,6 @@ const Header = () => {
     Router.push('/')
   }
 
-  console.log('query called')
   return (
     <nav>
       <div className="left">

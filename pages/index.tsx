@@ -41,7 +41,6 @@ const Blog = () => {
 
   const { loading: loadingAuth, data: dataAuth, error: errorAuth } = useQuery(isAuthenticatedQuery)
 
-  console.log("data auth", dataAuth, loadingAuth, errorAuth);
 
 
   if (loading) {

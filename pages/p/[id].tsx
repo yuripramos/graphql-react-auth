@@ -59,15 +59,12 @@ function Post() {
   const [deletePost] = useMutation(DeleteMutation)
 
   if (loading) {
-    console.log('loading')
     return <div>Loading ...</div>
   }
   if (error) {
-    console.log('error')
     return <div>Error: {error.message}</div>
   }
 
-  console.log(`response`, data)
 
   let title = data.post.title
   if (!data.post.published) {

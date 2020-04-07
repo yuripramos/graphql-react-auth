@@ -40,7 +40,6 @@ export function withApollo(PageComponent, { ssr = true } = {}) {
   if (ssr || PageComponent.getInitialProps) {
     WithApollo.getInitialProps = async ctx => {
       const { AppTree } = ctx
-      console.log('aqui só print com refresh')
       // token = cookies(ctx).token || ''
       // Initialize ApolloClient, add it to the ctx object so
       // we can use it in `PageComponent.getInitialProp`.
@@ -118,7 +117,6 @@ function initApolloClient(initialState) {
   return apolloClient
 }
 const authLink = setContext((_, { headers }) => {
-  console.log('aqui ele printa sempre ou pelo menos deveria')
   const token = localStorage.getItem('token')
   return {
     headers: {
