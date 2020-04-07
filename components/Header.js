@@ -1,9 +1,8 @@
 import { Fragment } from 'react'
 import Link from 'next/link'
 import { isAuthenticatedQuery } from '../queries'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery, useLazyQuery } from '@apollo/react-hooks'
 import Router from 'next/router'
-import Cookies from 'js-cookie'
 
 function isActive(pathname) {
   return (
@@ -11,14 +10,23 @@ function isActive(pathname) {
   )
 }
 
-function removeSession() {
-  Cookies.remove('token', { path: '' })
-  Router.push('/')
-}
-
 const Header = () => {
-  const isAuthenticated = useQuery(isAuthenticatedQuery).data
+  const { loading, data: dataAuth } = useQuery(isAuthenticatedQuery)
 
+  const [sendQuery, { data: dataAuthLazy }] = useLazyQuery(
+    isAuthenticatedQuery,
+    {
+      fetchPolicy: 'no-cache',
+    },
+  )
+
+  function removeSession() {
+    localStorage.removeItem('token')
+    sendQuery()
+    Router.push('/')
+  }
+
+  console.log('query called')
   return (
     <nav>
       <div className="left">
@@ -30,7 +38,7 @@ const Header = () => {
         </Link>
       </div>
       <div className="right">
-        {!!isAuthenticated ? (
+        {!!dataAuth || !!dataAuthLazy ? (
           <Fragment>
             <Link href="/create">
               <a data-active={isActive('/create')}>+ Create draft</a>

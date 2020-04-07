@@ -22,7 +22,7 @@ function Login(props) {
 
   const [login] = useMutation(LoginMutation, {
     onCompleted(data) {
-      document.cookie = `token=${data.login.token}; path=/`
+      localStorage.setItem('token', data.login.token)
     }
   })
 

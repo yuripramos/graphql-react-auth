@@ -4,10 +4,9 @@ import { ApolloProvider } from '@apollo/react-hooks'
 import { ApolloClient } from 'apollo-client'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import fetch from 'isomorphic-unfetch'
-import cookies from 'next-cookies'
+import { setContext } from 'apollo-link-context'
 
 let apolloClient = null
-let token = undefined
 /**
  * Creates and provides the apolloContext
  * to a next.js PageTree. Use it by wrapping
@@ -41,7 +40,8 @@ export function withApollo(PageComponent, { ssr = true } = {}) {
   if (ssr || PageComponent.getInitialProps) {
     WithApollo.getInitialProps = async ctx => {
       const { AppTree } = ctx
-      token = cookies(ctx).token || ''
+      console.log('aqui só print com refresh')
+      // token = cookies(ctx).token || ''
       // Initialize ApolloClient, add it to the ctx object so
       // we can use it in `PageComponent.getInitialProp`.
       const apolloClient = (ctx.apolloClient = initApolloClient())
@@ -117,6 +117,16 @@ function initApolloClient(initialState) {
 
   return apolloClient
 }
+const authLink = setContext((_, { headers }) => {
+  console.log('aqui ele printa sempre ou pelo menos deveria')
+  const token = localStorage.getItem('token')
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  }
+})
 
 /**
  * Creates and configures the ApolloClient
@@ -128,15 +138,15 @@ function createApolloClient(initialState = {}) {
 
   return new ApolloClient({
     ssrMode,
-    link: createIsomorphLink(),
+    link: authLink.concat(createIsomorphLink()),
     cache,
+    queryDeduplication: false,
   })
 }
 
 function createIsomorphLink() {
   const { HttpLink } = require('apollo-link-http')
   return new HttpLink({
-    headers: { Authorization: `Bearer ${token}` },
     uri: 'http://localhost:4000',
     credentials: 'same-origin',
   })
