@@ -4,7 +4,7 @@
     "es6": true
   },
   "extends": [
-    "eslint:recommended",
+    "plugin:react/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:prettier/recommended",
     "prettier/@typescript-eslint"
@@ -21,6 +21,5 @@
       "modules": true
     }
   },
-  "plugins": ["@typescript-eslint"],
-  "rules": {}
+  "plugins": ["@typescript-eslint"]
 }

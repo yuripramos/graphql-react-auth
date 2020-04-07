@@ -1,29 +1,26 @@
-import { Fragment } from 'react'
-import Link from 'next/link'
-import { isAuthenticatedQuery } from '../queries'
-import { useQuery, useLazyQuery } from '@apollo/react-hooks'
-import Router from 'next/router'
+import { Fragment, useEffect } from 'react';
+import Link from 'next/link';
+import { isAuthenticatedQuery } from '../queries';
+import { useQuery, useLazyQuery } from '@apollo/react-hooks';
+import Router from 'next/router';
 
 function isActive(pathname) {
-  return (
-    typeof document !== 'undefined' && document.location.pathname === pathname
-  )
+  return typeof document !== 'undefined' && document.location.pathname === pathname;
 }
 
 const Header = () => {
-  const { loading, data: dataAuth } = useQuery(isAuthenticatedQuery)
+  const { loading, data: dataAuth, errors } = useQuery(isAuthenticatedQuery);
 
-  const [sendQuery, { data: dataAuthLazy }] = useLazyQuery(
-    isAuthenticatedQuery,
-    {
-      fetchPolicy: 'no-cache',
-    },
-  )
+  const [sendQuery, { data: dataAuthLazy, errors: errorsLazy }] = useLazyQuery(isAuthenticatedQuery);
 
-  function removeSession() {
-    localStorage.removeItem('token')
-    sendQuery()
-    Router.push('/')
+  useEffect(() => {
+    console.log('inside useEffect', dataAuth, dataAuthLazy, errorsLazy, errors);
+  }, []);
+
+  async function removeSession() {
+    localStorage.removeItem('token');
+    sendQuery();
+    Router.push('/');
   }
 
   return (
@@ -101,7 +98,7 @@ const Header = () => {
         }
       `}</style>
     </nav>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
