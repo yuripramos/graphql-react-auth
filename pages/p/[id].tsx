@@ -6,8 +6,8 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import { PostQuery } from '../../queries';
 
 const PublishMutation = gql`
-  mutation PublishMutation($postId: ID!) {
-    publish(postId: $postId) {
+  mutation PublishMutation($id: ID!) {
+    publish(id: $id) {
       id
       title
       content
@@ -21,8 +21,8 @@ const PublishMutation = gql`
 `;
 
 const DeleteMutation = gql`
-  mutation DeleteMutation($postId: ID!) {
-    deletePost(postId: $postId) {
+  mutation DeleteMutation($id: Int!) {
+    deletePost(id: $id) {
       id
       title
       content
@@ -37,9 +37,8 @@ const DeleteMutation = gql`
 
 function Post() {
   const postId = useRouter().query.id;
-  console.log('postId', postId);
   const { loading, error, data } = useQuery(PostQuery, {
-    variables: { postId: postId },
+    variables: { id: postId },
   });
 
   const [publish] = useMutation(PublishMutation);
@@ -69,7 +68,7 @@ function Post() {
             onClick={async (e) => {
               await publish({
                 variables: {
-                  postId,
+                  id: postId,
                 },
               });
               Router.push('/');
@@ -82,7 +81,7 @@ function Post() {
           onClick={async (e) => {
             await deletePost({
               variables: {
-                postId,
+                id: postId,
               },
             });
             Router.push('/');
@@ -102,10 +101,18 @@ function Post() {
         }
 
         button {
-          background: #ececec;
+          background: hsla(0, 0%, 0%, 0.79);
+          font-weight: 600;
+          letter-spacing: 1.2px;
+          font-size: 16px;
+          color: #ffffff;
           border: 0;
           border-radius: 0.125rem;
           padding: 1rem 2rem;
+        }
+
+        button:hover {
+          background: #dc00dc;
         }
 
         button + button {

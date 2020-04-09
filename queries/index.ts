@@ -41,8 +41,8 @@ export const DraftsQuery = gql`
 `;
 
 export const PostQuery = gql`
-  query PostQuery($postId: ID!) {
-    post(postId: $postId) {
+  query PostQuery($id: ID!) {
+    post(id: $id) {
       id
       title
       content

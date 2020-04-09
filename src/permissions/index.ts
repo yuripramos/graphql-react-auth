@@ -1,23 +1,24 @@
-import { rule, shield } from 'graphql-shield'
-import { getUserId } from '../utils'
+import { rule, shield } from 'graphql-shield';
+import { getUserId } from '../utils';
 
 const rules = {
   isAuthenticatedUser: rule()((parent, args, context) => {
-    const userId = getUserId(context)
-    return Boolean(userId)
+    const userId = getUserId(context);
+    return Boolean(userId);
   }),
-  isPostOwner: rule()(async (parent, { id }, context) => {
-    const userId = getUserId(context)
+  isPostOwner: rule()(async (parent, { postId }, context) => {
+    const userId = getUserId(context);
+    console.log('id inside rules', postId);
     const author = await context.prisma.post
       .findOne({
         where: {
-          id,
+          id: postId,
         },
       })
-      .author()
-    return userId === author.id
+      .author();
+    return userId === author.id;
   }),
-}
+};
 
 export const permissions = shield({
   Query: {
@@ -30,4 +31,4 @@ export const permissions = shield({
     deletePost: rules.isPostOwner,
     publish: rules.isPostOwner,
   },
-})
+});

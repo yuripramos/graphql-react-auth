@@ -1,7 +1,7 @@
-import { compare, hash } from 'bcryptjs'
-import { sign } from 'jsonwebtoken'
-import { mutationType, stringArg, intArg } from 'nexus'
-import { APP_SECRET, getUserId } from '../utils'
+import { compare, hash } from 'bcryptjs';
+import { sign } from 'jsonwebtoken';
+import { mutationType, stringArg, intArg } from 'nexus';
+import { APP_SECRET, getUserId } from '../utils';
 
 export const Mutation = mutationType({
   definition(t) {
@@ -13,20 +13,20 @@ export const Mutation = mutationType({
         password: stringArg({ nullable: false }),
       },
       resolve: async (_parent, { name, email, password }, ctx) => {
-        const hashedPassword = await hash(password, 10)
+        const hashedPassword = await hash(password, 10);
         const user = await ctx.prisma.user.create({
           data: {
             name,
             email,
             password: hashedPassword,
           },
-        })
+        });
         return {
           token: sign({ userId: user.id }, APP_SECRET),
           user,
-        }
+        };
       },
-    })
+    });
 
     t.field('login', {
       type: 'AuthPayload',
@@ -39,20 +39,20 @@ export const Mutation = mutationType({
           where: {
             email,
           },
-        })
+        });
         if (!user) {
-          throw new Error(`No user found for email: ${email}`)
+          throw new Error(`No user found for email: ${email}`);
         }
-        const passwordValid = await compare(password, user.password)
+        const passwordValid = await compare(password, user.password);
         if (!passwordValid) {
-          throw new Error('Invalid password')
+          throw new Error('Invalid password');
         }
         return {
           token: sign({ userId: user.id }, APP_SECRET),
           user,
-        }
+        };
       },
-    })
+    });
 
     t.field('createDraft', {
       type: 'Post',
@@ -61,8 +61,8 @@ export const Mutation = mutationType({
         content: stringArg(),
       },
       resolve: (parent, { title, content }, ctx) => {
-        const userId = getUserId(ctx)
-        if (!userId) throw new Error('Could not authenticate user.')
+        const userId = getUserId(ctx);
+        if (!userId) throw new Error('Could not authenticate user.');
         return ctx.prisma.post.create({
           data: {
             title,
@@ -70,22 +70,23 @@ export const Mutation = mutationType({
             published: false,
             author: { connect: { id: Number(userId) } },
           },
-        })
+        });
       },
-    })
+    });
 
     t.field('deletePost', {
       type: 'Post',
       nullable: true,
       args: { id: intArg({ nullable: false }) },
       resolve: (parent, { id }, ctx) => {
+        console.log('postId');
         return ctx.prisma.post.delete({
           where: {
             id,
           },
-        })
+        });
       },
-    })
+    });
 
     t.field('publish', {
       type: 'Post',
@@ -95,8 +96,8 @@ export const Mutation = mutationType({
         return ctx.prisma.post.update({
           where: { id },
           data: { published: true },
-        })
+        });
       },
-    })
+    });
   },
-})
+});
