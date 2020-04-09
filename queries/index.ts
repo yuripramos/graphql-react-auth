@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export const FeedQuery = gql`
   query FeedQuery {
@@ -13,7 +13,7 @@ export const FeedQuery = gql`
       }
     }
   }
-`
+`;
 
 export const isAuthenticatedQuery = gql`
   query isAuthenticatedQuery {
@@ -23,7 +23,7 @@ export const isAuthenticatedQuery = gql`
       email
     }
   }
-`
+`;
 
 export const DraftsQuery = gql`
   query DraftsQuery {
@@ -38,4 +38,4 @@ export const DraftsQuery = gql`
       }
     }
   }
-`
+`;

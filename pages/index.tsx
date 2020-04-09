@@ -1,22 +1,21 @@
-import { useEffect } from 'react'
-import Layout from '../components/Layout'
-import Link from 'next/link'
-import { withApollo } from '../apollo/client'
-import { useQuery } from '@apollo/react-hooks'
+import { useEffect } from 'react';
+import Layout from '../components/Layout';
+import Link from 'next/link';
+import { withApollo } from '../apollo/client';
+import { useQuery } from '@apollo/react-hooks';
 import { FeedQuery, isAuthenticatedQuery } from '../queries';
 
-
 export interface Item {
-  content: string
-  author: string
-  title: string
-  name: string
+  content: string;
+  author: string;
+  title: string;
+  name: string;
 }
 
 export interface Post {
   post: {
-    [key: string]: Item
-  }
+    [key: string]: Item;
+  };
 }
 const Post = ({ post }: Post) => (
   <Link href="/p/[id]" as={`/p/${post.id}`}>
@@ -34,32 +33,26 @@ const Post = ({ post }: Post) => (
       `}</style>
     </a>
   </Link>
-)
+);
 
 const Blog = () => {
-  const { loading, error, data } = useQuery(FeedQuery)
+  const { loading, error, data } = useQuery(FeedQuery);
 
-  const { loading: loadingAuth, data: dataAuth, error: errorAuth } = useQuery(isAuthenticatedQuery)
-
-
+  const { loading: loadingAuth, data: dataAuth, error: errorAuth } = useQuery(isAuthenticatedQuery);
 
   if (loading) {
-    return <div>Loading ...</div>
+    return <div>Loading ...</div>;
   }
   if (error) {
-    return <div>Error: {error.message}</div>
+    return <div>Error: {error.message}</div>;
   }
 
   return (
     <Layout>
       <div className="page">
-        {!!dataAuth && !loadingAuth ? (
-          <h1> Welcome back {dataAuth.me.name} </h1>
-        ) : (
-            <h1>My Blog</h1>
-          )}
+        {!!dataAuth && !loadingAuth ? <h1> Welcome back {dataAuth.me.name} </h1> : <h1>My Blog</h1>}
         <main>
-          {data.feed.map(post => (
+          {data.feed.map((post) => (
             <div className="post">
               <Post key={post.id} post={post} />
             </div>
@@ -67,7 +60,6 @@ const Blog = () => {
         </main>
       </div>
       <style jsx>{`
-
         h1 {
           text-transform: capitalize;
         }
@@ -85,7 +77,7 @@ const Blog = () => {
         }
       `}</style>
     </Layout>
-  )
-}
+  );
+};
 
-export default withApollo(Blog)
+export default withApollo(Blog);

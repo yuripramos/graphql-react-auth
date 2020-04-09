@@ -1,27 +1,26 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { isAuthenticatedQuery } from '../queries';
-import { useQuery, useLazyQuery } from '@apollo/react-hooks';
-import Router from 'next/router';
+import { useQuery } from '@apollo/react-hooks';
+import { withApollo } from '../apollo/client';
 
 function isActive(pathname) {
   return typeof document !== 'undefined' && document.location.pathname === pathname;
 }
 
 const Header = () => {
-  const { loading, data: dataAuth, errors } = useQuery(isAuthenticatedQuery);
+  const { loading, data: dataAuth, error } = useQuery(isAuthenticatedQuery);
 
-  const [sendQuery, { data: dataAuthLazy, errors: errorsLazy }] = useLazyQuery(isAuthenticatedQuery);
+  const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
-    console.log('inside useEffect', dataAuth, dataAuthLazy, errorsLazy, errors);
+    setIsAuth(Boolean(localStorage.getItem('token')) || false);
   }, []);
 
-  async function removeSession() {
+  const removeSession = async () => {
     localStorage.removeItem('token');
-    sendQuery();
-    Router.push('/');
-  }
+    setIsAuth(false);
+  };
 
   return (
     <nav>
@@ -34,7 +33,7 @@ const Header = () => {
         </Link>
       </div>
       <div className="right">
-        {!!dataAuth || !!dataAuthLazy ? (
+        {!!isAuth ? (
           <Fragment>
             <Link href="/create">
               <a data-active={isActive('/create')}>+ Create draft</a>
@@ -101,4 +100,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default withApollo(Header);
