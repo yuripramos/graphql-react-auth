@@ -68,7 +68,10 @@ function Login(props) {
         }
 
         input[type='submit'] {
-          background: #ecddec;
+          background: hsla(0, 0%, 0%, 0.79);
+          font-weight: 600;
+          letter-spacing: 1.2px;
+          color: #ffffff;
           border: 0;
           padding: 1rem 2rem;
         }

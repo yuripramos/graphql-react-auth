@@ -39,3 +39,18 @@ export const DraftsQuery = gql`
     }
   }
 `;
+
+export const PostQuery = gql`
+  query PostQuery($postId: ID!) {
+    post(postId: $postId) {
+      id
+      title
+      content
+      published
+      author {
+        id
+        name
+      }
+    }
+  }
+`;

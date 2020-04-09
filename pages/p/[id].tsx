@@ -1,23 +1,9 @@
-import Layout from '../../components/Layout'
-import Router, { useRouter } from 'next/router'
-import { withApollo } from '../../apollo/client'
-import gql from 'graphql-tag'
-import { useQuery, useMutation } from '@apollo/react-hooks'
-
-const PostQuery = gql`
-  query PostQuery($postId: ID!) {
-    post(postId: $postId) {
-      id
-      title
-      content
-      published
-      author {
-        id
-        name
-      }
-    }
-  }
-`
+import Layout from '../../components/Layout';
+import Router, { useRouter } from 'next/router';
+import { withApollo } from '../../apollo/client';
+import gql from 'graphql-tag';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import { PostQuery } from '../../queries';
 
 const PublishMutation = gql`
   mutation PublishMutation($postId: ID!) {
@@ -32,7 +18,7 @@ const PublishMutation = gql`
       }
     }
   }
-`
+`;
 
 const DeleteMutation = gql`
   mutation DeleteMutation($postId: ID!) {
@@ -47,31 +33,31 @@ const DeleteMutation = gql`
       }
     }
   }
-`
+`;
 
 function Post() {
-  const postId = useRouter().query.id
+  const postId = useRouter().query.id;
+  console.log('postId', postId);
   const { loading, error, data } = useQuery(PostQuery, {
-    variables: { postId },
-  })
+    variables: { postId: postId },
+  });
 
-  const [publish] = useMutation(PublishMutation)
-  const [deletePost] = useMutation(DeleteMutation)
+  const [publish] = useMutation(PublishMutation);
+  const [deletePost] = useMutation(DeleteMutation);
 
   if (loading) {
-    return <div>Loading ...</div>
+    return <div>Loading ...</div>;
   }
   if (error) {
-    return <div>Error: {error.message}</div>
+    return <div>Error: {error.message}</div>;
   }
 
-
-  let title = data.post.title
+  let title = data.post.title;
   if (!data.post.published) {
-    title = `${title} (Draft)`
+    title = `${title} (Draft)`;
   }
 
-  const authorName = data.post.author ? data.post.author.name : 'Unknown author'
+  const authorName = data.post.author ? data.post.author.name : 'Unknown author';
   return (
     <Layout>
       <div>
@@ -80,26 +66,28 @@ function Post() {
         <p>{data.post.content}</p>
         {!data.post.published && (
           <button
-            onClick={async e => {
+            onClick={async (e) => {
               await publish({
                 variables: {
                   postId,
                 },
-              })
-              Router.push('/')
-            }}>
+              });
+              Router.push('/');
+            }}
+          >
             Publish
           </button>
         )}
         <button
-          onClick={async e => {
+          onClick={async (e) => {
             await deletePost({
               variables: {
                 postId,
               },
-            })
-            Router.push('/')
-          }}>
+            });
+            Router.push('/');
+          }}
+        >
           Delete
         </button>
       </div>
@@ -125,7 +113,7 @@ function Post() {
         }
       `}</style>
     </Layout>
-  )
+  );
 }
 
-export default withApollo(Post)
+export default withApollo(Post);

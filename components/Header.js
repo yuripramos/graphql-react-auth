@@ -58,6 +58,7 @@ const Header = () => {
           display: flex;
           padding: 2rem;
           align-items: center;
+          background: #ffff8acc;
         }
 
         .bold {
@@ -87,7 +88,7 @@ const Header = () => {
         .right a {
           padding: 0.5rem 1rem;
           border-radius: 5px;
-          background: hsla(0, 89%, 63%, 0.79);
+          background: hsla(0, 0%, 0%, 0.79);
           color: white;
           font-weight: 500;
         }
