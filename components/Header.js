@@ -59,15 +59,16 @@ const Header = () => {
           padding: 2rem;
           align-items: center;
           background: hsla(0, 0%, 82%, 0.75);
+          height: 100px;
         }
 
         .bold {
-          font-weight: bold;
+          font-weight: 900;
         }
 
         a {
           text-decoration: none;
-          color: gray;
+          color: #000;
           font-weight: regular;
           display: inline-block;
         }
@@ -75,6 +76,7 @@ const Header = () => {
         .left a[data-active='true'] {
           color: #000;
           font-weight: bold;
+          font-size: 20px;
         }
 
         a + a {

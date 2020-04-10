@@ -4,6 +4,7 @@ import Router from 'next/router'
 import { withApollo } from '../apollo/client'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
+import { ErrorMsg } from '../components/error';
 
 const SignupMutation = gql`
   mutation SignupMutation($name: String, $email: String!, $password: String!) {
@@ -19,7 +20,7 @@ function Signup(props) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const [signup] = useMutation(SignupMutation)
+  const [signup, { error: errorSignup }] = useMutation(SignupMutation)
 
   return (
     <Layout>
@@ -58,6 +59,9 @@ function Signup(props) {
             type="password"
             value={password}
           />
+          {errorSignup && (
+            <ErrorMsg error={errorSignup} />
+          )}
           <input disabled={!name || !email} type="submit" value="Signup" />
           <a className="back" href="#" onClick={() => Router.push('/')}>
             or Cancel

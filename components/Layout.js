@@ -14,8 +14,6 @@ const Footer = () => (
         footer {
           text-align: center;
           background: #287194;
-          position: absolute;
-          bottom: 0;
           width: 100%;
           height: 75px;
           font-family: sans-serif;
@@ -25,6 +23,9 @@ const Footer = () => (
         a {
           text-decoration: none;
           color: #fff;
+        }
+        p {
+          padding-top: 14px;
         }
 
         span {
@@ -72,6 +73,7 @@ const Layout = (props) => (
     <style jsx>{`
       .layout {
         padding: 0 2rem;
+        min-height: calc(100vh - 210px);
       }
     `}</style>
   </div>

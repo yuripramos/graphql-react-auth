@@ -4,6 +4,7 @@ import Router from 'next/router';
 import { withApollo } from '../apollo/client';
 import gql from 'graphql-tag';
 import { useMutation, useQuery, useApolloClient } from '@apollo/react-hooks';
+import { ErrorMsg } from '../components/error';
 
 const LoginMutation = gql`
   mutation LoginMutation($email: String!, $password: String!) {
@@ -18,7 +19,7 @@ function Login(props) {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
-  const [login] = useMutation(LoginMutation, {
+  const [login, { error: loginError }] = useMutation(LoginMutation, {
     onCompleted(data) {
       localStorage.setItem('token', data.login.token);
     },
@@ -44,6 +45,9 @@ function Login(props) {
           <h1>Login user</h1>
           <input autoFocus onChange={(e) => setEmail(e.target.value)} placeholder="Email" type="text" value={email} />
           <input onChange={(e) => setPassword(e.target.value)} placeholder="Password" type="password" value={password} />
+          {loginError && (
+            <ErrorMsg error={loginError} />
+          )}
           <input disabled={!password || !email} type="submit" value="Login" />
           <a className="back" href="#" onClick={() => Router.push('/')}>
             or Cancel

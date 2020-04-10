@@ -4,6 +4,7 @@ import { withApollo } from '../../apollo/client';
 import gql from 'graphql-tag';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { PostQuery } from '../../queries';
+import { ErrorMsg } from '../../components/error';
 
 const PublishMutation = gql`
   mutation PublishMutation($id: Int!) {
@@ -41,8 +42,8 @@ function Post() {
     variables: { id: postId },
   });
 
-  const [publish] = useMutation(PublishMutation);
-  const [deletePost] = useMutation(DeleteMutation);
+  const [publish, { error: errorPublish }] = useMutation(PublishMutation);
+  const [deletePost, { error: errorDelete }] = useMutation(DeleteMutation);
 
   if (loading) {
     return <div>Loading ...</div>;
@@ -57,12 +58,19 @@ function Post() {
   }
 
   const authorName = data.post.author ? data.post.author.name : 'Unknown author';
+  console.log("errors", errorPublish, errorDelete);
   return (
     <Layout>
       <div>
         <h2>{title}</h2>
         <p>By {authorName}</p>
         <p>{data.post.content}</p>
+        {errorDelete && (
+          <ErrorMsg error={errorDelete} />
+        )}
+        {errorPublish && (
+          <ErrorMsg error={errorPublish} />
+        )}
         {!data.post.published && (
           <button
             onClick={async (e) => {
