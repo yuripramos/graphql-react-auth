@@ -6,13 +6,12 @@ const rules = {
     const userId = getUserId(context);
     return Boolean(userId);
   }),
-  isPostOwner: rule()(async (parent, { postId }, context) => {
+  isPostOwner: rule()(async (parent, { id }, context) => {
     const userId = getUserId(context);
-    console.log('id inside rules', postId);
     const author = await context.prisma.post
       .findOne({
         where: {
-          id: postId,
+          id,
         },
       })
       .author();

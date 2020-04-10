@@ -1,9 +1,46 @@
-import Header from './Header'
+import Header from './Header';
 
-const Layout = props => (
+const Footer = () => (
+  <footer>
+    <p>Made with love with Typescript and React</p>
+    <span>
+      by{' '}
+      <a href="http://github.com/yuripramos" target="_blank">
+        Yuri Ramos
+      </a>
+    </span>
+    <style jsx>
+      {`
+        footer {
+          text-align: center;
+          background: #287194;
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          height: 75px;
+          font-family: sans-serif;
+          color: #fff;
+        }
+
+        a {
+          text-decoration: none;
+          color: #fff;
+        }
+
+        span {
+          padding-top: 5px;
+          font-size: 12px;
+        }
+      `}
+    </style>
+  </footer>
+);
+
+const Layout = (props) => (
   <div>
     <Header />
     <div className="layout">{props.children}</div>
+    <Footer />
     <style jsx global>{`
       html {
         box-sizing: border-box;
@@ -19,9 +56,7 @@ const Layout = props => (
         margin: 0;
         padding: 0;
         font-size: 16px;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-          Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-          'Segoe UI Symbol';
+        font-family: sans-serif;
         background: rgba(0, 0, 0, 0.05);
       }
 
@@ -40,6 +75,6 @@ const Layout = props => (
       }
     `}</style>
   </div>
-)
+);
 
-export default Layout
+export default Layout;

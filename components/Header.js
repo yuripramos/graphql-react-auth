@@ -58,7 +58,7 @@ const Header = () => {
           display: flex;
           padding: 2rem;
           align-items: center;
-          background: #ffff8acc;
+          background: hsla(0, 0%, 82%, 0.75);
         }
 
         .bold {

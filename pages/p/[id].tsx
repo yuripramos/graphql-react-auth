@@ -6,7 +6,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import { PostQuery } from '../../queries';
 
 const PublishMutation = gql`
-  mutation PublishMutation($id: ID!) {
+  mutation PublishMutation($id: Int!) {
     publish(id: $id) {
       id
       title
@@ -68,7 +68,7 @@ function Post() {
             onClick={async (e) => {
               await publish({
                 variables: {
-                  id: postId,
+                  id: Number(postId),
                 },
               });
               Router.push('/');
@@ -81,7 +81,7 @@ function Post() {
           onClick={async (e) => {
             await deletePost({
               variables: {
-                id: postId,
+                id: Number(postId),
               },
             });
             Router.push('/');

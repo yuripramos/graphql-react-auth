@@ -71,9 +71,18 @@ function Draft(props) {
         }
 
         input[type='submit'] {
-          background: #ececec;
+          background: hsla(0, 0%, 0%, 0.79);
+          font-weight: 600;
+          letter-spacing: 1.2px;
+          color: #ffffff;
           border: 0;
           padding: 1rem 2rem;
+        }
+
+        input[type='submit']:hover {
+          background: #dc00dc;
+          cursor: pointer;
+          color: #fff;
         }
 
         .back {

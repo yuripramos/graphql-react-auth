@@ -30,6 +30,10 @@ const Post = ({ post }: Post) => (
           padding: 2rem;
           display: block;
         }
+
+        h2 {
+          text-transform: capitalize;
+        }
       `}</style>
     </a>
   </Link>
