@@ -2,17 +2,9 @@ import React, { useState } from 'react';
 import Layout from '../components/Layout';
 import Router from 'next/router';
 import { withApollo } from '../apollo/client';
-import gql from 'graphql-tag';
 import { useMutation, useQuery, useApolloClient } from '@apollo/react-hooks';
 import { ErrorMsg } from '../components/error';
-
-const LoginMutation = gql`
-  mutation LoginMutation($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      token
-    }
-  }
-`;
+import { LoginMutation } from "../mutations";
 
 function Login(props) {
   const client = useApolloClient();

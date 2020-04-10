@@ -2,18 +2,9 @@ import React, { useState } from 'react'
 import Layout from '../components/Layout'
 import Router from 'next/router'
 import { withApollo } from '../apollo/client'
-import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 import { ErrorMsg } from '../components/error';
-
-const SignupMutation = gql`
-  mutation SignupMutation($name: String, $email: String!, $password: String!) {
-    signup(name: $name, email: $email, password: $password) {
-      token
-    }
-  }
-`
-
+import { SignupMutation } from '../mutations';
 
 function Signup(props) {
   const [name, setName] = useState('')

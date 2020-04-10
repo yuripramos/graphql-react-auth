@@ -5,36 +5,8 @@ import gql from 'graphql-tag';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { PostQuery } from '../../queries';
 import { ErrorMsg } from '../../components/error';
+import { PublishMutation, DeleteMutation } from "../../mutations";
 
-const PublishMutation = gql`
-  mutation PublishMutation($id: Int!) {
-    publish(id: $id) {
-      id
-      title
-      content
-      published
-      author {
-        id
-        name
-      }
-    }
-  }
-`;
-
-const DeleteMutation = gql`
-  mutation DeleteMutation($id: Int!) {
-    deletePost(id: $id) {
-      id
-      title
-      content
-      published
-      author {
-        id
-        name
-      }
-    }
-  }
-`;
 
 function Post() {
   const postId = useRouter().query.id;

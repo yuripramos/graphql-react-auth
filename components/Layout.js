@@ -15,7 +15,7 @@ const Footer = () => (
           text-align: center;
           background: #287194;
           width: 100%;
-          height: 75px;
+          height: 73px;
           font-family: sans-serif;
           color: #fff;
         }

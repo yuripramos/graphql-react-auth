@@ -4,7 +4,6 @@ import { withApollo } from '../apollo/client'
 import { useQuery } from '@apollo/react-hooks'
 import { DraftsQuery } from '../queries';
 
-
 const Post = ({ post }) => (
   <Link href="/p/[id]" as={`/p/${post.id}`}>
     <a>

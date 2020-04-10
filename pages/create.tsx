@@ -5,21 +5,8 @@ import Router from 'next/router';
 import { withApollo } from '../apollo/client';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
+import { CreateDraftMutation } from "../mutations";
 
-const CreateDraftMutation = gql`
-  mutation CreateDraftMutation($title: String!, $content: String) {
-    createDraft(title: $title, content: $content) {
-      id
-      title
-      content
-      published
-      author {
-        id
-        name
-      }
-    }
-  }
-`;
 
 function Draft(props) {
   const [title, setTitle] = useState('');
