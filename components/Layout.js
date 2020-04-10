@@ -2,7 +2,7 @@ import Header from './Header';
 
 const Footer = () => (
   <footer>
-    <p>Made with love with Typescript and React</p>
+    <p>Made with Typescript and React</p>
     <span>
       by{' '}
       <a href="http://github.com/yuripramos" target="_blank">

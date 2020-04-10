@@ -18,29 +18,31 @@
 
 |     | Specs                                                                                                                            |
 | --- | -------------------------------------------------------------------------------------------------------------------------------- |
-| ⚡️ | **Apollo-client** State management library                                                                                       |
+| ⚡️ | **Apollo-client** state management library                                                                                       |
 | 📈  | **GraphQL** GraphQL is a query language and execution engine tied to any backend service                                         |
-| ⚛️  | **React 16.12**. Latest stable version of react                                                                                  |
+| ⚛️  | **React 16.12**. latest stable version of react                                                                                  |
 | ✨  | **React Hooks** [React hooks](https://reactjs.org/docs/hooks-intro.html)                                                         |
 | 💎  | **Prisma**. GraphQL server with any database                                                                                     |
-| 😎  | **TypeScript** JavaScript that scales.s                                                                                          |
+| 😎  | **TypeScript** JavaScript that scales.                                                                                          |
 | 🛡   | **GraphQL-Shield** [Shield](https://github.com/maticzav/graphql-shield) A GraphQL tool to ease the creation of permission layer. |
 
 ## Purpose?
 
-**Authenticate** app using prisma and SSR.
+**Authenticatication** app using prisma and SSR.
 
 It's optimized to **complex applications** if you want to fork in your project and adapt according your needs. This is a **real-world example**.
 
-For simple apps, using third-party authentication is enough but sometimes you want to have control about you are using and don't want use only OAuth or other authentications. Made with TypeScript and reusable components you can adapt this to **any** kind of of project. With prisma things got way more easier and you don't need anymora a back-end environment to build from the scratch an authentication.
+For simple apps, using third-party authentication is enough but sometimes you want to have control about you are using and don't want use only OAuth or other authentications. Made with TypeScript and reusable components you can adapt this to **any** kind of of project. With prisma the things got way more easier and **you don't need anymore a back-end environment to build from the scratch an authentication**.
 
-## Usage
+## Roadmap
+|     |                                                                      |
+| --- | ---------------------------------------------------------------------|
+| **Create blog posts**   |              ✔️                                  |
+| **See your blog posts**  |              ✔️                                 |
+| **Save blog drafts**    |              ✔️                                  |
+| **Signup user**         |              ✔️                                  |
+|**Authenticate user**    |              ✔️                                  |
 
-**Create blog posts:** Create posts</br>
-**See your blog posts** See your posts</br>
-**Save blog drafts:** Save your drafts</br>
-**Signup user:** Signup</br>
-**Authenticate user:** Login the existent user</br>
 
 First, install
 
@@ -55,7 +57,7 @@ then, run your server
 npm run dev or yarn dev
 ```
 
-and last, run the client
+and last, run the client in a new tab
 
 ```js
 npm run client or yarn client
