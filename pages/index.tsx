@@ -40,7 +40,7 @@ const Post = ({ post }: Post) => (
 );
 
 const Blog = () => {
-  const { loading, error, data } = useQuery(FeedQuery);
+  const { loading, error, data } = useQuery(FeedQuery, { fetchPolicy: 'no-cache' });
 
   const { loading: loadingAuth, data: dataAuth, error: errorAuth } = useQuery(isAuthenticatedQuery);
 

@@ -24,7 +24,7 @@ const Post = ({ post }) => (
 )
 
 const Drafts = () => {
-  const { loading, error, data } = useQuery(DraftsQuery)
+  const { loading, error, data } = useQuery(DraftsQuery, { fetchPolicy: 'no-cache' })
 
   if (loading) {
     return <div>Loading ...</div>
