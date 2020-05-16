@@ -8,7 +8,7 @@ function isActive(pathname) {
   return typeof document !== 'undefined' && document.location.pathname === pathname;
 }
 
-const Header = () => {
+export const Header = () => {
   const { loading, data: dataAuth, error } = useQuery(isAuthenticatedQuery);
 
   const [isAuth, setIsAuth] = useState(false);
@@ -43,15 +43,15 @@ const Header = () => {
             </Link>
           </Fragment>
         ) : (
-          <Fragment>
-            <Link href="/signup">
-              <a data-active={isActive('/signup')}>Signup</a>
-            </Link>
-            <Link href="/login">
-              <a data-active={isActive('/login')}>Login</a>
-            </Link>
-          </Fragment>
-        )}
+            <Fragment>
+              <Link href="/signup">
+                <a data-active={isActive('/signup')}>Signup</a>
+              </Link>
+              <Link href="/login">
+                <a data-active={isActive('/login')}>Login</a>
+              </Link>
+            </Fragment>
+          )}
       </div>
       <style jsx>{`
         nav {
