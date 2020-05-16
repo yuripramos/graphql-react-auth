@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { isAuthenticatedQuery } from '../queries';
 import { useQuery } from '@apollo/react-hooks';
 import { withApollo } from '../apollo/client';
+import React from 'react';
 
 function isActive(pathname) {
   return typeof document !== 'undefined' && document.location.pathname === pathname;
@@ -12,7 +13,7 @@ export const Header = () => {
   const { loading, data: dataAuth, error } = useQuery(isAuthenticatedQuery);
 
   const [isAuth, setIsAuth] = useState(false);
-
+  console.log('data', dataAuth)
   useEffect(() => {
     setIsAuth(Boolean(localStorage.getItem('token')) || false);
   }, []);

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { withApollo } from '../apollo/client';
 import { useQuery } from '@apollo/react-hooks';
 import { FeedQuery, isAuthenticatedQuery } from '../queries';
-
+import React from 'react';
 export interface Item {
   content: string;
   author: string;

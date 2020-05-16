@@ -1,5 +1,5 @@
 import Header from './Header';
-
+import React from 'react';
 const Footer = () => (
   <footer>
     <p>Made with Typescript and React</p>
