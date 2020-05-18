@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Header } from '../Header';
 import { renderWithApolloMockedProvider, buildApolloMockWithData } from '../../tests/testUtils';
+import { isAuthenticatedQuery } from '../../queries';
 
 describe('<Header />', () => {
 
@@ -27,7 +28,7 @@ describe('<Header />', () => {
         {
           mocks: [
             buildApolloMockWithData(
-              FeedQuery,
+              isAuthenticatedQuery,
               {},
               mockedData
             )
