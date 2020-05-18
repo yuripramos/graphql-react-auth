@@ -1,7 +1,5 @@
 import { Fragment, useState, useEffect } from 'react';
 import Link from 'next/link';
-import { isAuthenticatedQuery } from '../queries';
-import { useQuery } from '@apollo/react-hooks';
 import { withApollo } from '../apollo/client';
 import React from 'react';
 
@@ -10,9 +8,9 @@ function isActive(pathname) {
 }
 
 export const Header = () => {
-  const { loading, data: dataAuth, error } = useQuery(isAuthenticatedQuery);
 
   const [isAuth, setIsAuth] = useState(false);
+
   useEffect(() => {
     setIsAuth(Boolean(localStorage.getItem('token')) || false);
   }, []);
