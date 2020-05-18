@@ -1,14 +1,38 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { Header } from '../Header';
-import { renderWithApolloMockedProvider } from '../../tests/testUtils';
+import { renderWithApolloMockedProvider, buildApolloMockWithData } from '../../tests/testUtils';
 
 describe('<Header />', () => {
+
+  const mockedData = [
+    {
+      id: 2,
+      title: "Subscribe to GraphQL Weekly for community news ",
+      content: "https://graphqlweekly.com/",
+      published: true,
+      author: {
+        id: 1,
+        name: "Bob",
+        __typename: "User"
+      },
+      __typename: "Post"
+    }
+  ];
 
   it("render component without crashing", () => {
     expect(() => {
       renderWithApolloMockedProvider(
-        <Header />
+        <Header />,
+        {
+          mocks: [
+            buildApolloMockWithData(
+              FeedQuery,
+              {},
+              mockedData
+            )
+          ]
+        }
       );
     }).not.toThrow();
   })

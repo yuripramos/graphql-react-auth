@@ -13,7 +13,6 @@ export const Header = () => {
   const { loading, data: dataAuth, error } = useQuery(isAuthenticatedQuery);
 
   const [isAuth, setIsAuth] = useState(false);
-  console.log('data', dataAuth)
   useEffect(() => {
     setIsAuth(Boolean(localStorage.getItem('token')) || false);
   }, []);
@@ -73,11 +72,15 @@ export const Header = () => {
           font-weight: regular;
           display: inline-block;
         }
-
+        .left {
+          width: 70%;
+          display: inline-flex;
+        }
         .left a[data-active='true'] {
           color: #000;
           font-weight: bold;
           font-size: 20px;
+          width: 100px;
         }
 
         a + a {
@@ -85,7 +88,10 @@ export const Header = () => {
         }
 
         .right {
-          margin-left: auto;
+          width: 30%;
+          display: inline-flex;
+          justify-content: flex-end;
+          padding-right: 35px;
         }
 
         .right a {

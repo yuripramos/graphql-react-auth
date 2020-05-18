@@ -6,7 +6,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import { PostQuery } from '../../queries';
 import { ErrorMsg } from '../../components/error';
 import { PublishMutation, DeleteMutation } from "../../mutations";
-
+import React from 'react';
 
 function Post() {
   const postId = useRouter().query.id;

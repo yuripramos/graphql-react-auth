@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
+
+import React from 'react';
 import Layout from '../components/Layout';
 import Link from 'next/link';
 import { withApollo } from '../apollo/client';
 import { useQuery } from '@apollo/react-hooks';
 import { FeedQuery, isAuthenticatedQuery } from '../queries';
-import React from 'react';
+
 export interface Item {
   content: string;
   author: string;
@@ -26,7 +27,7 @@ const Post = ({ post }: Post) => (
       <style jsx>{`
         a {
           text-decoration: none;
-          color: inherit;
+          color: #000;
           padding: 2rem;
           display: block;
         }
@@ -50,7 +51,7 @@ const Blog = () => {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-
+  console.log('data fetch', data.feed);
   return (
     <Layout>
       <div className="page">
@@ -77,7 +78,7 @@ const Blog = () => {
         }
 
         .post + .post {
-          margin-top: 2rem;
+          margin: 2rem 0;
         }
       `}</style>
     </Layout>

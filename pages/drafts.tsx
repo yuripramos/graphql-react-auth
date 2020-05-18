@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { withApollo } from '../apollo/client'
 import { useQuery } from '@apollo/react-hooks'
 import { DraftsQuery } from '../queries';
+import React from 'react';
 
 const Post = ({ post }) => (
   <Link href="/p/[id]" as={`/p/${post.id}`}>
@@ -55,7 +56,7 @@ const Drafts = () => {
         }
 
         .post + .post {
-          margin-top: 2rem;
+          margin: 2rem 0;
         }
       `}</style>
     </Layout>
