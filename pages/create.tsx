@@ -6,11 +6,9 @@ import { withApollo } from '../apollo/client';
 import { useMutation } from '@apollo/react-hooks';
 import { CreateDraftMutation } from "../mutations";
 
-export interface DraftContainer {
-  props?: object
-};
 
-export const Draft: React.FC<DraftContainer> = (props) => {
+
+export const Draft: React.FC = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
@@ -81,5 +79,5 @@ export const Draft: React.FC<DraftContainer> = (props) => {
     </Layout>
   );
 }
-
 export default withApollo(Draft);
+

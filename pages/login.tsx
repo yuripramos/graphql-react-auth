@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import Layout from '../components/Layout';
 import Router from 'next/router';
 import { withApollo } from '../apollo/client';
-import { useMutation, useQuery, useApolloClient } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 import { ErrorMsg } from '../components/error';
 import { LoginMutation } from "../mutations";
 
 function Login(props) {
-  const client = useApolloClient();
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
