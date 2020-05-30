@@ -3,12 +3,12 @@ import fetch from 'isomorphic-unfetch';
 import Layout from '../components/Layout';
 import Router from 'next/router';
 import { withApollo } from '../apollo/client';
-import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 import { CreateDraftMutation } from "../mutations";
 
 
-function Draft(props) {
+
+export const Draft: React.FC = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
@@ -79,5 +79,5 @@ function Draft(props) {
     </Layout>
   );
 }
-
 export default withApollo(Draft);
+
