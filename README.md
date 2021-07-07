@@ -20,7 +20,7 @@
 | --- | -------------------------------------------------------------------------------------------------------------------------------- |
 | ⚡️ | **Apollo-client** state management library                                                                                       |
 | 📈  | **GraphQL** GraphQL is a query language and execution engine tied to any backend service                                         |
-| ⚛️  | **React 16.12**. latest stable version of react                                                                                  |
+| ⚛️  | **React 16.12**.                                                                               |
 | ✨  | **React Hooks** [React hooks](https://reactjs.org/docs/hooks-intro.html)                                                         |
 | 💎  | **Prisma**. GraphQL server with any database                                                                                     |
 | 😎  | **TypeScript** JavaScript that scales.                                                                                          |
